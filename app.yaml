@@ -1,11 +1,12 @@
-runtime: php82 # Sesuaikan dengan versi PHP Anda, misal php81 atau php83
+runtime: php82
 env: standard
 
 handlers:
-# Layani file statis (CSS, JS, Fonts jika ada) secara langsung
-- url: /css
-  static_dir: css
+# 1. Layani semua file desain & aset secara otomatis tanpa diblokir
+- url: /(.*\.(css|js|png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot|ico|map))$
+  static_files: \1
+  upload: .*\.(css|js|png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot|ico|map)$
 
-# Semua request web diarahkan ke skrip PHP
+# 2. Semua rute lainnya diarahkan ke skrip PHP router
 - url: /.*
   script: auto

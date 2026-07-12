@@ -1,20 +1,22 @@
 <?php
-// Ambil path URL yang sedang diakses (misal: /pengguna/landing.php)
+// Ambil path URL yang sedang diakses
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// Jika user mengakses domain utama secara langsung, arahkan ke landing page pengguna
+// Arahkan domain utama ke landing page pengguna
 if ($path === '/' || $path === '/index.php' || $path === '') {
     header('Location: /pengguna/landing.php');
     exit;
 }
 
-// Cari lokasi absolut file di dalam server
 $file = __DIR__ . $path;
 
-// Cek apakah file yang diminta itu ada dan merupakan file .php
+// PENTING: Jika user mengakses folder (misal: /admin/), otomatis arahkan ke file index.php di dalamnya
+if (is_dir($file)) {
+    $file = rtrim($file, '/') . '/index.php';
+}
+
+// Cek apakah file yang diminta benar-benar ada dan merupakan PHP
 if (file_exists($file) && is_file($file) && pathinfo($file, PATHINFO_EXTENSION) === 'php') {
-    // PENTING: Ubah direktori kerja ke folder tempat file tersebut berada.
-    // Ini memastikan script Anda seperti "include '../koneksi.php'" tidak error.
     chdir(dirname($file));
     require basename($file);
 } else {
