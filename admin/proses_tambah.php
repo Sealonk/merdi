@@ -1,4 +1,7 @@
 <?php
+// Wajib memanggil autoload dari Composer untuk menggunakan library Google Cloud
+require __DIR__ . '/../vendor/autoload.php';
+use Google\Cloud\Storage\StorageClient;
 
 include '../koneksi.php';
 
@@ -15,10 +18,23 @@ $foto = '';
 if(isset($_FILES['foto']) && $_FILES['foto']['error'] == 0){
 
     $foto = time() . "_" . $_FILES['foto']['name'];
+    $tmp_name = $_FILES['foto']['tmp_name'];
 
-    move_uploaded_file(
-        $_FILES['foto']['tmp_name'],
-        "../uploads/" . $foto
+    // Inisialisasi Google Cloud Storage
+    // Pastikan mengganti 'ID_PROYEK_GOOGLE_CLOUD_ANDA' dengan Project ID Anda
+    $storage = new StorageClient([
+        'projectId' => 'merdi-502214'
+    ]);
+    
+    // Pastikan mengganti 'nama-bucket-kontrakan-anda' dengan nama Bucket Anda yang sebenarnya
+    $bucket = $storage->bucket('kontrakan_merdi'); 
+
+    // Proses upload file ke Cloud Bucket
+    $bucket->upload(
+        fopen($tmp_name, 'r'),
+        [
+            'name' => $foto
+        ]
     );
 }
 

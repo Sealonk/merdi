@@ -1,0 +1,11 @@
+runtime: php82 # Sesuaikan dengan versi PHP Anda, misal php81 atau php83
+env: standard
+
+handlers:
+# Layani file statis (CSS, JS, Fonts jika ada) secara langsung
+- url: /css
+  static_dir: css
+
+# Semua request web diarahkan ke skrip PHP
+- url: /.*
+  script: auto

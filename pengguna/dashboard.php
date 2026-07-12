@@ -539,7 +539,7 @@ color:#1e3a8a;">
 
     <?php if(!empty($data['foto'])): ?>
 
-        <img src="../uploads/<?= htmlspecialchars($data['foto']) ?>">
+        <img src="https://storage.googleapis.com/kontrakan_merdi/<?= htmlspecialchars($data['foto']) ?>">
 
     <?php else: ?>
 

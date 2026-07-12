@@ -138,7 +138,7 @@ min-width:100%;
 <div class="box">
 
 <?php if(!empty($foto)): ?>
-<img src="../uploads/<?= htmlspecialchars($foto) ?>" class="foto" alt="<?= $nama ?>">
+<img src="https://storage.googleapis.com/kontrakan_merdi/<?= htmlspecialchars($foto) ?>" class="foto" alt="<?= $nama ?>">
 <?php endif; ?>
 
 <div class="content">

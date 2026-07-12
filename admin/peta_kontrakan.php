@@ -63,7 +63,7 @@ L.marker([<?= $row['latitude']; ?>, <?= $row['longitude']; ?>])
 .addTo(map)
 .bindPopup(`
     <center>
-        <img src="foto/<?= $row['foto'] ?? 'default.jpg'; ?>" width="120"><br><br>
+        <img src="https://storage.googleapis.com/kontrakan_merdi/<?= $row['foto'] ?? 'default.jpg'; ?>" width="120"><br><br>
 
         <b><?= $row['nama_kontrakan'] ?? '-' ?></b><br>
 

@@ -110,7 +110,7 @@ body{
 
 <div class="card">
 
-<img src="foto/<?php echo $row['foto']; ?>">
+<img src="https://storage.googleapis.com/kontrakan_merdi/<?php echo $row['foto']; ?>">
 
 <div class="content">
 
